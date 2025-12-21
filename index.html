@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тригонометрический тест</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e6e6e6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(25, 25, 35, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        header {
+            background: linear-gradient(to right, #0f3460, #1a1a2e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #ff9a00, #ff5e00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            position: relative;
+        }
+        
+        .timer-container {
+            padding: 15px 30px;
+            background: rgba(15, 52, 96, 0.8);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .timer {
+            font-size: 1.6rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            min-width: 130px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .timer.warning {
+            color: #ffcc00;
+            border-color: #ffcc00;
+            animation: pulse 1s infinite;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+        }
+        
+        .timer.danger {
+            color: #ff3333;
+            border-color: #ff3333;
+            animation: pulse 0.5s infinite;
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .progress-container {
+            padding: 20px 30px;
+            background: rgba(40, 40, 60, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00b09b, #96c93d);
+            width: 0%;
+            transition: width 0.7s ease;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #b0b0d0;
+        }
+        
+        .question-container {
+            padding: 40px;
+            min-height: 400px;
+        }
+        
+        .question-number {
+            color: #ff9a00;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .question-number i {
+            font-size: 1.5rem;
+        }
+        
+        .question-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #f0f0f0;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ff9a00;
+        }
+        
+        .answers-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .answers-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .answer-option {
+            padding: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(40, 40, 60, 0.7);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .answer-option:hover {
+            border-color: #3498db;
+            background: rgba(52, 152, 219, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .answer-option.selected {
+            border-color: #2ecc71;
+            background: rgba(46, 204, 113, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.2);
+        }
+        
+        .answer-checkbox {
+            margin-right: 15px;
+            width: 22px;
+            height: 22px;
+            accent-color: #2ecc71;
+            cursor: pointer;
+        }
+        
+        .answer-text {
+            flex-grow: 1;
+            font-size: 1.15rem;
+            color: #e6e6e6;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            padding: 25px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(30, 30, 50, 0.7);
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-next {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-next:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-next:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .results-container {
+            padding: 40px;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .results-title {
+            font-size: 2.5rem;
+            color: #ff9a00;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(#2ecc71 0% 0%, #34495e 0% 100%);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 5px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .score-inner {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .score-value {
+            font-size: 3.5rem;
+            color: #2ecc71;
+            text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+        }
+        
+        .score-total {
+            font-size: 1.3rem;
+            color: #b0b0d0;
+        }
+        
+        .comment-container {
+            margin: 30px auto;
+            max-width: 700px;
+            background: rgba(40, 40, 60, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #ff9a00;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .comment {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        
+        .time-info {
+            font-size: 1.2rem;
+            color: #b0b0d0;
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .start-container {
+            padding: 50px 40px;
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .btn-start {
+            background: linear-gradient(45deg, #9b59b6, #3498db);
+            color: white;
+            padding: 18px 45px;
+            font-size: 1.4rem;
+            margin-top: 30px;
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.3);
+        }
+        
+        .btn-start:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(155, 89, 182, 0.4);
+        }
+        
+        .rules {
+            text-align: left;
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(40, 40, 60, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .rules h3 {
+            margin-bottom: 20px;
+            color: #ff9a00;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .rules ul {
+            padding-left: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .rules li {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #e6e6e6;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        .rules li::before {
+            content: "•";
+            color: #ff9a00;
+            font-size: 1.5rem;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .highlight {
+            background: linear-gradient(45deg, #ff9a00, #ff5e00);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .time-up-message {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 700px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(255, 65, 108, 0.3);
+        }
+        
+        .btn-restart {
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            color: white;
+            margin-top: 30px;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-restart:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(231, 76, 60, 0.4);
+        }
+        
+        .mistakes-container {
+            margin: 40px auto;
+            max-width: 850px;
+            text-align: left;
+        }
+        
+        .mistakes-title {
+            font-size: 1.8rem;
+            color: #ff9a00;
+            margin-bottom: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .mistake-item {
+            background: rgba(40, 40, 60, 0.7);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #e74c3c;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mistake-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mistake-question {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #f0f0f0;
+            line-height: 1.5;
+        }
+        
+        .mistake-answers {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 15px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .mistake-answers {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .answer-item {
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .answer-item.correct {
+            background: rgba(46, 204, 113, 0.2);
+            border: 2px solid #2ecc71;
+        }
+        
+        .answer-item.incorrect {
+            background: rgba(231, 76, 60, 0.2);
+            border: 2px solid #e74c3c;
+        }
+        
+        .answer-item.user-selected {
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
+        }
+        
+        .answer-marker {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 12px;
+            text-align: center;
+            font-weight: bold;
+            line-height: 25px;
+            flex-shrink: 0;
+        }
+        
+        .correct-marker {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .incorrect-marker {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .mistake-explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 193, 7, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .no-mistakes {
+            text-align: center;
+            padding: 40px;
+            background: rgba(46, 204, 113, 0.15);
+            border-radius: 15px;
+            border: 2px solid #2ecc71;
+            color: #d4edda;
+            font-size: 1.3rem;
+            margin: 30px 0;
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.1);
+        }
+        
+        .icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .header-icon {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.1;
+            color: #ff9a00;
+        }
+        
+        .header-icon:nth-child(1) {
+            top: 20px;
+            left: 20px;
+        }
+        
+        .header-icon:nth-child(2) {
+            top: 20px;
+            right: 20px;
+        }
+        
+        .header-icon:nth-child(3) {
+            bottom: 20px;
+            left: 50px;
+        }
+        
+        .header-icon:nth-child(4) {
+            bottom: 20px;
+            right: 50px;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .results-icon {
+            font-size: 2.5rem;
+            color: #ff9a00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <i class="fas fa-superscript header-icon"></i>
+            <i class="fas fa-calculator header-icon"></i>
+            <i class="fas fa-chart-line header-icon"></i>
+            <i class="fas fa-brain header-icon"></i>
+            <h1>Тригонометрический тест</h1>
+            <div class="subtitle">Проверь свои знания формул</div>
+        </header>
+        
+        <div id="timerContainer" class="timer-container" style="display: none;">
+            <div><i class="fas fa-clock icon"></i>Осталось времени:</div>
+            <div class="timer" id="timer">09:36</div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">
+                <span id="currentQuestion">0</span> из <span id="totalQuestions">20</span> вопросов
+            </div>
+        </div>
+        
+        <div id="startContainer" class="start-container">
+            <h2><i class="fas fa-rocket icon"></i>Проверка знаний по тригонометрии</h2>
+            
+            <div class="rules">
+                <h3><i class="fas fa-list-alt icon"></i>Правила тестирования</h3>
+                <ul>
+                    <li>Тест состоит из <span class="highlight">20 случайных вопросов</span> из большого банка заданий</li>
+                    <li>На выполнение дается <span class="highlight">9 минут 36 секунд</span></li>
+                    <li>В некоторых вопросах может быть <span class="highlight">несколько правильных ответов</span></li>
+                    <li>Варианты ответов <span class="highlight">перемешиваются случайным образом</span> для каждого вопроса</li>
+                    <li>Каждый вопрос оценивается в <span class="highlight">1 балл</span></li>
+                    <li>Для ответа отметьте все подходящие варианты</li>
+                    <li>Результаты и разбор ошибок будут показаны только после завершения теста</li>
+                    <li>Таймер отображается только во время теста</li>
+                </ul>
+                
+                <div style="text-align: center; font-weight: bold; color: #ff9a00; margin: 20px 0; padding: 15px; background: rgba(255, 154, 0, 0.1); border-radius: 10px; border-left: 4px solid #ff9a00;">
+                    <i class="fas fa-exclamation-triangle icon"></i>Внимание! Таймер начнет отсчет сразу после начала теста!
+                </div>
+            </div>
+            
+            <button class="btn btn-start" id="startBtn">
+                <i class="fas fa-play-circle"></i>Начать тест
+            </button>
+        </div>
+        
+        <div id="questionContainer" class="question-container" style="display: none;">
+            <div class="question-number">
+                <i class="fas fa-question-circle"></i>
+                <span id="questionNumber">Вопрос 1 из 20</span>
+            </div>
+            <div class="question-text" id="questionText"></div>
+            
+            <div class="answers-container" id="answersContainer">
+                <!-- Ответы будут добавлены через JavaScript -->
+            </div>
+            
+            <div class="controls">
+                <button class="btn btn-next" id="nextBtn" disabled>
+                    <i class="fas fa-arrow-right"></i>Следующий вопрос
+                </button>
+            </div>
+        </div>
+        
+        <div id="resultsContainer" class="results-container">
+            <div class="results-header">
+                <i class="fas fa-trophy results-icon"></i>
+                <h2 class="results-title">Результаты теста</h2>
+                <i class="fas fa-award results-icon"></i>
+            </div>
+            
+            <div class="score-circle" id="scoreCircle">
+                <div class="score-inner">
+                    <div class="score-value" id="scoreValue">0</div>
+                    <div class="score-total">из 20</div>
+                </div>
+            </div>
+            
+            <div class="comment-container" id="commentContainer">
+                <!-- Комментарий будет добавлен через JavaScript -->
+            </div>
+            
+            <div class="time-info" id="timeInfo">
+                <!-- Информация о времени будет добавлена через JavaScript -->
+            </div>
+            
+            <div id="mistakesContainer" class="mistakes-container">
+                <!-- Разбор ошибок будет добавлен через JavaScript -->
+            </div>
+            
+            <button class="btn btn-restart" id="restartResultsBtn">
+                <i class="fas fa-redo"></i>Пройти тест еще раз
+            </button>
+        </div>
+        
+        <div id="timeUpContainer" class="results-container" style="display: none;">
+            <div class="time-up-message">
+                <i class="fas fa-hourglass-end icon"></i>Время вышло! Тест автоматически завершен.
+            </div>
+            
+            <div class="results-header">
+                <i class="fas fa-clock results-icon"></i>
+                <h2 class="results-title">Результаты теста</h2>
+                <i class="fas fa-stopwatch results-icon"></i>
+            </div>
+            
+            <div class="score-circle" id="timeUpScoreCircle">
+                <div class="score-inner">
+                    <div class="score-value" id="timeUpScoreValue">0</div>
+                    <div class="score-total">из 20</div>
+                </div>
+            </div>
+            
+            <div class="comment-container" id="timeUpCommentContainer">
+                <!-- Комментарий будет добавлен через JavaScript -->
+            </div>
+            
+            <div class="time-info">
+                Тест был автоматически завершен по истечении времени
+            </div>
+            
+            <div id="timeUpMistakesContainer" class="mistakes-container">
+                <!-- Разбор ошибок будет добавлен через JavaScript -->
+            </div>
+            
+            <button class="btn btn-restart" id="timeUpRestartBtn">
+                <i class="fas fa-redo"></i>Пройти тест еще раз
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Большой банк вопросов для теста (40 вопросов)
+        const questionBank = [
+            // Формулы приведения (12 вопросов)
+            {
+                question: "Выберите правильную формулу приведения: sin(π/2 + α) =",
+                answers: ["cos α", "-cos α", "sin α", "-sin α"],
+                correct: [0],
+                explanation: "Формула приведения: sin(π/2 + α) = cos α. Угол π/2 соответствует 90°, синус угла 90°+α равен косинусу α."
+            },
+            {
+                question: "Выберите правильную формулу приведения: cos(π - α) =",
+                answers: ["cos α", "-cos α", "sin α", "-sin α"],
+                correct: [1],
+                explanation: "Формула приведения: cos(π - α) = -cos α. Косинус развернутого угла минус α равен отрицательному косинусу α."
+            },
+            {
+                question: "Какие из этих формул приведения верны для tg(π + α)?",
+                answers: ["tg α", "-tg α", "ctg α", "-ctg α"],
+                correct: [0],
+                explanation: "Формула приведения: tg(π + α) = tg α. Тангенс имеет период π, поэтому добавление π не меняет значение тангенса."
+            },
+            {
+                question: "Выберите ВСЕ верные формулы приведения:",
+                answers: ["sin(π - α) = sin α", "cos(π/2 + α) = -sin α", "tg(3π/2 - α) = ctg α", "cos(2π - α) = -cos α"],
+                correct: [0, 1, 2],
+                explanation: "Правильные формулы: sin(π - α) = sin α, cos(π/2 + α) = -sin α, tg(3π/2 - α) = ctg α. Неверная формула: cos(2π - α) = cos α (без минуса)."
+            },
+            {
+                question: "sin(3π/2 - α) равно:",
+                answers: ["-cos α", "cos α", "-sin α", "sin α"],
+                correct: [0],
+                explanation: "Формула приведения: sin(3π/2 - α) = -cos α. Угол 3π/2 соответствует 270°, синус 270°-α равен отрицательному косинусу α."
+            },
+            {
+                question: "cos(π/2 - α) равно:",
+                answers: ["sin α", "-sin α", "cos α", "-cos α"],
+                correct: [0],
+                explanation: "Формула приведения: cos(π/2 - α) = sin α. Косинус угла 90°-α равен синусу α."
+            },
+            {
+                question: "tg(π/2 - α) равно:",
+                answers: ["ctg α", "-ctg α", "tg α", "-tg α"],
+                correct: [0],
+                explanation: "Формула приведения: tg(π/2 - α) = ctg α. Тангенс угла 90°-α равен котангенсу α."
+            },
+            {
+                question: "sin(2π - α) равно:",
+                answers: ["-sin α", "sin α", "-cos α", "cos α"],
+                correct: [0],
+                explanation: "Формула приведения: sin(2π - α) = -sin α. Синус угла 360°-α равен отрицательному синусу α."
+            },
+            {
+                question: "cos(3π/2 + α) равно:",
+                answers: ["sin α", "-sin α", "cos α", "-cos α"],
+                correct: [0],
+                explanation: "Формула приведения: cos(3π/2 + α) = sin α. Косинус угла 270°+α равен синусу α."
+            },
+            {
+                question: "ctg(π - α) равно:",
+                answers: ["-ctg α", "ctg α", "tg α", "-tg α"],
+                correct: [0],
+                explanation: "Формула приведения: ctg(π - α) = -ctg α. Котангенс развернутого угла минус α равен отрицательному котангенсу α."
+            },
+            {
+                question: "sin(π + α) равно:",
+                answers: ["-sin α", "sin α", "-cos α", "cos α"],
+                correct: [0],
+                explanation: "Формула приведения: sin(π + α) = -sin α. Синус угла 180°+α равен отрицательному синусу α."
+            },
+            {
+                question: "cos(π/2 + α) равно:",
+                answers: ["-sin α", "sin α", "-cos α", "cos α"],
+                correct: [0],
+                explanation: "Формула приведения: cos(π/2 + α) = -sin α. Косинус угла 90°+α равен отрицательному синусу α."
+            },
+            
+            // Простейшие тригонометрические уравнения (8 вопросов)
+            {
+                question: "Формула решения уравнения sin x = a:",
+                answers: ["x = (-1)ⁿ arcsin a + πn", "x = ±arccos a + 2πn", "x = arcsin a + 2πn", "x = (-1)ⁿ arcsin a + 2πn"],
+                correct: [3],
+                explanation: "Правильная формула: x = (-1)ⁿ arcsin a + 2πn, где n ∈ Z. Это общее решение уравнения sin x = a."
+            },
+            {
+                question: "Выберите ВСЕ правильные формулы решений:",
+                answers: ["cos x = a ⇒ x = ±arccos a + 2πn", "tg x = a ⇒ x = arctg a + πn", "sin x = 0 ⇒ x = πn", "cos x = 0 ⇒ x = π/2 + 2πn"],
+                correct: [0, 1, 2],
+                explanation: "Правильные формулы: cos x = a ⇒ x = ±arccos a + 2πn, tg x = a ⇒ x = arctg a + πn, sin x = 0 ⇒ x = πn. Неверная формула: cos x = 0 ⇒ x = π/2 + πn (а не + 2πn)."
+            },
+            {
+                question: "Решение уравнения cos x = -1/2:",
+                answers: ["x = ±2π/3 + 2πn", "x = ±π/3 + 2πn", "x = π ± π/3 + 2πn", "x = (-1)ⁿ π/3 + πn"],
+                correct: [0],
+                explanation: "Решение уравнения cos x = -1/2: x = ±arccos(-1/2) + 2πn = ±(π - π/3) + 2πn = ±2π/3 + 2πn, где n ∈ Z."
+            },
+            {
+                question: "При каких a уравнение sin x = a имеет решения?",
+                answers: ["При любом a", "При |a| ≤ 1", "При a ≥ 0", "При -1 ≤ a ≤ 1"],
+                correct: [1, 3],
+                explanation: "Уравнение sin x = a имеет решения при условии |a| ≤ 1 или -1 ≤ a ≤ 1, так как область значений синуса [-1, 1]."
+            },
+            {
+                question: "Решение уравнения tg x = √3:",
+                answers: ["x = π/3 + πn", "x = π/6 + πn", "x = π/4 + πn", "x = π/2 + πn"],
+                correct: [0],
+                explanation: "Решение уравнения tg x = √3: x = arctg(√3) + πn = π/3 + πn, где n ∈ Z."
+            },
+            {
+                question: "Решение уравнения sin x = 1:",
+                answers: ["x = π/2 + 2πn", "x = (-1)ⁿ π/2 + πn", "x = π/2 + πn", "x = ±π/2 + 2πn"],
+                correct: [0],
+                explanation: "Решение уравнения sin x = 1: x = π/2 + 2πn, где n ∈ Z."
+            },
+            {
+                question: "Решение уравнения cos x = 0:",
+                answers: ["x = π/2 + πn", "x = ±π/2 + 2πn", "x = π/2 + 2πn", "x = ±π/2 + πn"],
+                correct: [0],
+                explanation: "Решение уравнения cos x = 0: x = π/2 + πn, где n ∈ Z."
+            },
+            {
+                question: "Решение уравнения sin x = -√2/2:",
+                answers: ["x = (-1)ⁿ⁺¹ π/4 + πn", "x = (-1)ⁿ π/4 + πn", "x = ±π/4 + 2πn", "x = π ± π/4 + 2πn"],
+                correct: [0],
+                explanation: "Решение уравнения sin x = -√2/2: x = (-1)ⁿ⁺¹ π/4 + πn, где n ∈ Z."
+            },
+            
+            // Формулы двойного угла (8 вопросов)
+            {
+                question: "Выберите ВСЕ верные формулы двойного угла:",
+                answers: ["sin 2α = 2sinα cosα", "cos 2α = cos²α - sin²α", "tg 2α = 2tgα/(1 - tg²α)", "cos 2α = 1 - 2sin²α"],
+                correct: [0, 1, 2, 3],
+                explanation: "Все формулы верны: sin 2α = 2sinα cosα, cos 2α = cos²α - sin²α = 1 - 2sin²α = 2cos²α - 1, tg 2α = 2tgα/(1 - tg²α)."
+            },
+            {
+                question: "cos 2α через sin α равен:",
+                answers: ["1 - 2sin²α", "2sin²α - 1", "sin²α - cos²α", "1 - sin²α"],
+                correct: [0],
+                explanation: "Формула: cos 2α = 1 - 2sin²α. Это следует из формулы cos 2α = cos²α - sin²α и тождества cos²α = 1 - sin²α."
+            },
+            {
+                question: "sin 2α можно выразить как:",
+                answers: ["2sinα cosα", "sin²α - cos²α", "(1 - cos2α)/2", "2tgα/(1 + tg²α)"],
+                correct: [0, 3],
+                explanation: "sin 2α можно выразить как 2sinα cosα и через тангенс половинного угла: 2tgα/(1 + tg²α). Формула (1 - cos2α)/2 выражает sin²α, а не sin 2α."
+            },
+            {
+                question: "Какие из формул следуют из формул двойного угла?",
+                answers: ["sin²α = (1 - cos2α)/2", "cos²α = (1 + cos2α)/2", "tg²α = (1 - cos2α)/(1 + cos2α)", "sinα = 2sin(α/2)cos(α/2)"],
+                correct: [0, 1, 3],
+                explanation: "Формулы понижения степени: sin²α = (1 - cos2α)/2, cos²α = (1 + cos2α)/2 и формула синуса половинного угла: sinα = 2sin(α/2)cos(α/2) следуют из формул двойного угла."
+            },
+            {
+                question: "tg 2α через tg α равен:",
+                answers: ["2tgα/(1 - tg²α)", "2tgα/(1 + tg²α)", "(1 - tg²α)/(2tgα)", "2/(ctgα - tgα)"],
+                correct: [0],
+                explanation: "Формула тангенса двойного угла: tg 2α = 2tgα/(1 - tg²α)."
+            },
+            {
+                question: "cos 2α через cos α равен:",
+                answers: ["2cos²α - 1", "1 - 2cos²α", "cos²α - 1", "2 - cos²α"],
+                correct: [0],
+                explanation: "Формула: cos 2α = 2cos²α - 1. Это следует из формулы cos 2α = cos²α - sin²α и тождества sin²α = 1 - cos²α."
+            },
+            {
+                question: "sin²α через cos 2α равен:",
+                answers: ["(1 - cos2α)/2", "(1 + cos2α)/2", "(cos2α - 1)/2", "1 - cos2α"],
+                correct: [0],
+                explanation: "Формула понижения степени: sin²α = (1 - cos2α)/2."
+            },
+            {
+                question: "cos²α через cos 2α равен:",
+                answers: ["(1 + cos2α)/2", "(1 - cos2α)/2", "(cos2α + 1)/2", "1 + cos2α"],
+                correct: [0],
+                explanation: "Формула понижения степени: cos²α = (1 + cos2α)/2."
+            },
+            
+            // Формулы суммы и разности (8 вопросов)
+            {
+                question: "sin(α + β) равен:",
+                answers: ["sinα cosβ + cosα sinβ", "sinα cosβ - cosα sinβ", "cosα cosβ - sinα sinβ", "cosα cosβ + sinα sinβ"],
+                correct: [0],
+                explanation: "Формула синуса суммы: sin(α + β) = sinα cosβ + cosα sinβ."
+            },
+            {
+                question: "Выберите ВСЕ верные формулы:",
+                answers: ["cos(α - β) = cosα cosβ + sinα sinβ", "sin(α - β) = sinα cosβ - cosα sinβ", "tg(α + β) = (tgα + tgβ)/(1 - tgα tgβ)", "ctg(α - β) = (ctgα ctgβ + 1)/(ctgβ - ctgα)"],
+                correct: [0, 1, 2],
+                explanation: "Правильные формулы: cos(α - β) = cosα cosβ + sinα sinβ, sin(α - β) = sinα cosβ - cosα sinβ, tg(α + β) = (tgα + tgβ)/(1 - tgα tgβ). Формула для ctg неверна."
+            },
+            {
+                question: "cos 75° можно вычислить как cos(45° + 30°). Какая формула применяется?",
+                answers: ["cosα cosβ - sinα sinβ", "cosα cosβ + sinα sinβ", "sinα cosβ + cosα sinβ", "sinα cosβ - cosα sinβ"],
+                correct: [0],
+                explanation: "Для вычисления cos(45° + 30°) применяется формула косинуса суммы: cos(α + β) = cosα cosβ - sinα sinβ."
+            },
+            {
+                question: "tg(α - β) равен:",
+                answers: ["(tgα - tgβ)/(1 + tgα tgβ)", "(tgα + tgβ)/(1 - tgα tgβ)", "(ctgβ - ctgα)/(1 + ctgα ctgβ)", "(sinα cosβ - cosα sinβ)/(cosα cosβ + sinα sinβ)"],
+                correct: [0],
+                explanation: "Формула тангенса разности: tg(α - β) = (tgα - tgβ)/(1 + tgα tgβ)."
+            },
+            {
+                question: "cos(α + β) равен:",
+                answers: ["cosα cosβ - sinα sinβ", "cosα cosβ + sinα sinβ", "sinα cosβ + cosα sinβ", "sinα cosβ - cosα sinβ"],
+                correct: [0],
+                explanation: "Формула косинуса суммы: cos(α + β) = cosα cosβ - sinα sinβ."
+            },
+            {
+                question: "sin 15° можно вычислить как sin(45° - 30°). Какая формула применяется?",
+                answers: ["sinα cosβ - cosα sinβ", "sinα cosβ + cosα sinβ", "cosα cosβ - sinα sinβ", "cosα cosβ + sinα sinβ"],
+                correct: [0],
+                explanation: "Для вычисления sin(45° - 30°) применяется формула синуса разности: sin(α - β) = sinα cosβ - cosα sinβ."
+            },
+            {
+                question: "ctg(α + β) равен:",
+                answers: ["(ctgα ctgβ - 1)/(ctgα + ctgβ)", "(ctgα ctgβ + 1)/(ctgα + ctgβ)", "(ctgα + ctgβ)/(ctgα ctgβ - 1)", "(ctgα + ctgβ)/(ctgα ctgβ + 1)"],
+                correct: [0],
+                explanation: "Формула котангенса суммы: ctg(α + β) = (ctgα ctgβ - 1)/(ctgα + ctgβ)."
+            },
+            {
+                question: "sin(α - β) равен:",
+                answers: ["sinα cosβ - cosα sinβ", "sinα cosβ + cosα sinβ", "cosα cosβ - sinα sinβ", "cosα cosβ + sinα sinβ"],
+                correct: [0],
+                explanation: "Формула синуса разности: sin(α - β) = sinα cosβ - cosα sinβ."
+            },
+            
+            // Формулы суммы и разности функций (4 вопроса)
+            {
+                question: "sin α + sin β равен:",
+                answers: ["2 sin((α+β)/2) cos((α-β)/2)", "2 cos((α+β)/2) sin((α-β)/2)", "2 sin((α+β)/2) sin((α-β)/2)", "2 cos((α+β)/2) cos((α-β)/2)"],
+                correct: [0],
+                explanation: "Формула преобразования суммы синусов в произведение: sin α + sin β = 2 sin((α+β)/2) cos((α-β)/2)."
+            },
+            {
+                question: "Выберите ВСЕ верные формулы преобразования сумм в произведения:",
+                answers: ["cosα + cosβ = 2cos((α+β)/2)cos((α-β)/2)", "sinα - sinβ = 2cos((α+β)/2)sin((α-β)/2)", "cosα - cosβ = -2sin((α+β)/2)sin((α-β)/2)", "sinα + cosβ = 2sin((α+β)/2)cos((α-β)/2)"],
+                correct: [0, 2],
+                explanation: "Правильные формулы: cosα + cosβ = 2cos((α+β)/2)cos((α-β)/2) и cosα - cosβ = -2sin((α+β)/2)sin((α-β)/2). Формула для sinα - sinβ неверна."
+            },
+            {
+                question: "cos α - cos β равен:",
+                answers: ["-2 sin((α+β)/2) sin((α-β)/2)", "2 sin((α+β)/2) sin((α-β)/2)", "2 cos((α+β)/2) cos((α-β)/2)", "-2 cos((α+β)/2) cos((α-β)/2)"],
+                correct: [0],
+                explanation: "Формула преобразования разности косинусов в произведение: cos α - cos β = -2 sin((α+β)/2) sin((α-β)/2)."
+            },
+            {
+                question: "sin α - sin β равен:",
+                answers: ["2 sin((α-β)/2) cos((α+β)/2)", "2 cos((α+β)/2) sin((α-β)/2)", "2 sin((α+β)/2) sin((α-β)/2)", "2 cos((α-β)/2) sin((α+β)/2)"],
+                correct: [0],
+                explanation: "Формула преобразования разности синусов в произведение: sin α - sin β = 2 sin((α-β)/2) cos((α+β)/2)."
+            }
+        ];
+
+        // Перемешиваем вопросы и ответы для каждого вопроса
+        function prepareQuestions() {
+            // Выбираем случайные 20 вопросов из банка
+            const shuffledQuestions = [...questionBank];
+            shuffleArray(shuffledQuestions);
+            const selectedQuestions = shuffledQuestions.slice(0, 20);
+            
+            const finalQuestions = [];
+            
+            // Обрабатываем каждый выбранный вопрос
+            selectedQuestions.forEach(question => {
+                const questionCopy = JSON.parse(JSON.stringify(question));
+                
+                // Создаем массив индексов ответов
+                const answerIndices = Array.from({length: questionCopy.answers.length}, (_, i) => i);
+                
+                // Перемешиваем индексы
+                shuffleArray(answerIndices);
+                
+                // Переупорядочиваем ответы согласно перемешанным индексам
+                const shuffledAnswers = answerIndices.map(i => questionCopy.answers[i]);
+                
+                // Обновляем правильные ответы с учетом нового порядка
+                const shuffledCorrect = questionCopy.correct.map(correctIndex => {
+                    return answerIndices.indexOf(correctIndex);
+                }).sort((a, b) => a - b);
+                
+                // Сохраняем информацию о соответствии между оригинальными и перемешанными ответами
+                questionCopy.originalCorrect = [...questionCopy.correct];
+                questionCopy.originalAnswers = [...questionCopy.answers];
+                questionCopy.answerMapping = answerIndices;
+                
+                // Обновляем вопрос с перемешанными данными
+                questionCopy.answers = shuffledAnswers;
+                questionCopy.correct = shuffledCorrect;
+                
+                finalQuestions.push(questionCopy);
+            });
+            
+            return finalQuestions;
+        }
+
+        // Утилита для перемешивания массива
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Переменные состояния теста
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+        let shuffledQuestions = [];
+        let timeLeft = 9 * 60 + 36; // 9 минут 36 секунд в секундах
+        let timerInterval = null;
+        let testStartTime = null;
+        let testEndTime = null;
+
+        // Элементы DOM
+        const startContainer = document.getElementById('startContainer');
+        const questionContainer = document.getElementById('questionContainer');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const timeUpContainer = document.getElementById('timeUpContainer');
+        const timerContainer = document.getElementById('timerContainer');
+        const startBtn = document.getElementById('startBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const restartResultsBtn = document.getElementById('restartResultsBtn');
+        const timeUpRestartBtn = document.getElementById('timeUpRestartBtn');
+        const questionText = document.getElementById('questionText');
+        const questionNumber = document.getElementById('questionNumber');
+        const answersContainer = document.getElementById('answersContainer');
+        const progressFill = document.getElementById('progressFill');
+        const currentQuestionElem = document.getElementById('currentQuestion');
+        const totalQuestionsElem = document.getElementById('totalQuestions');
+        const scoreValue = document.getElementById('scoreValue');
+        const timeUpScoreValue = document.getElementById('timeUpScoreValue');
+        const scoreCircle = document.getElementById('scoreCircle');
+        const timeUpScoreCircle = document.getElementById('timeUpScoreCircle');
+        const commentContainer = document.getElementById('commentContainer');
+        const timeUpCommentContainer = document.getElementById('timeUpCommentContainer');
+        const timeInfo = document.getElementById('timeInfo');
+        const timer = document.getElementById('timer');
+        const mistakesContainer = document.getElementById('mistakesContainer');
+        const timeUpMistakesContainer = document.getElementById('timeUpMistakesContainer');
+
+        // Форматирование времени
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Обновление таймера
+        function updateTimer() {
+            timer.textContent = formatTime(timeLeft);
+            
+            // Изменение стиля при малом остатке времени
+            if (timeLeft <= 60) {
+                timer.classList.add('danger');
+                timer.classList.remove('warning');
+            } else if (timeLeft <= 180) {
+                timer.classList.add('warning');
+                timer.classList.remove('danger');
+            } else {
+                timer.classList.remove('warning', 'danger');
+            }
+            
+            if (timeLeft <= 0) {
+                timeUp();
+            } else {
+                timeLeft--;
+            }
+        }
+
+        // Запуск таймера
+        function startTimer() {
+            testStartTime = new Date();
+            timerInterval = setInterval(updateTimer, 1000);
+            timerContainer.style.display = 'flex';
+        }
+
+        // Остановка таймера
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            testEndTime = new Date();
+        }
+
+        // Время вышло
+        function timeUp() {
+            stopTimer();
+            questionContainer.style.display = 'none';
+            timeUpContainer.style.display = 'block';
+            
+            // Рассчитать результат для завершенных вопросов
+            const answeredQuestions = currentQuestionIndex;
+            score = 0;
+            
+            for (let i = 0; i < answeredQuestions; i++) {
+                if (userAnswers[i]) {
+                    const question = shuffledQuestions[i];
+                    const isCorrect = JSON.stringify(userAnswers[i].sort()) === JSON.stringify(question.correct.sort());
+                    if (isCorrect) score++;
+                }
+            }
+            
+            // Установить счет
+            timeUpScoreValue.textContent = score;
+            
+            // Установить прогресс в круговой диаграмме
+            const percentage = (score / shuffledQuestions.length) * 100;
+            timeUpScoreCircle.style.background = `conic-gradient(#2ecc71 0% ${percentage}%, #34495e ${percentage}% 100%)`;
+            
+            // Установить саркастичный комментарий
+            timeUpCommentContainer.innerHTML = `
+                <div class="comment">${getSarcasticComment(score, true)}</div>
+            `;
+            
+            // Показать разбор ошибок
+            showMistakesAnalysis(true);
+        }
+
+        // Инициализация теста
+        function initTest() {
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
+            shuffledQuestions = prepareQuestions();
+            timeLeft = 9 * 60 + 36; // 9 минут 36 секунд
+            
+            // Сбросить таймер
+            timer.textContent = formatTime(timeLeft);
+            timer.classList.remove('warning', 'danger');
+            
+            // Показать первый вопрос
+            showQuestion();
+            
+            // Обновить прогресс
+            updateProgress();
+            
+            // Переключить контейнеры
+            startContainer.style.display = 'none';
+            questionContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            timeUpContainer.style.display = 'none';
+            
+            // Запустить таймер
+            startTimer();
+        }
+
+        // Показать текущий вопрос
+        function showQuestion() {
+            const question = shuffledQuestions[currentQuestionIndex];
+            
+            // Установить текст вопроса
+            questionText.textContent = question.question;
+            questionNumber.textContent = `Вопрос ${currentQuestionIndex + 1} из ${shuffledQuestions.length}`;
+            
+            // Очистить контейнер ответов
+            answersContainer.innerHTML = '';
+            
+            // Создать элементы ответов
+            question.answers.forEach((answer, index) => {
+                const answerElement = document.createElement('div');
+                answerElement.className = 'answer-option';
+                answerElement.dataset.index = index;
+                
+                answerElement.innerHTML = `
+                    <input type="checkbox" class="answer-checkbox" id="answer${index}">
+                    <label class="answer-text" for="answer${index}">${answer}</label>
+                `;
+                
+                // Обработчик выбора ответа
+                answerElement.addEventListener('click', () => {
+                    const checkbox = answerElement.querySelector('.answer-checkbox');
+                    checkbox.checked = !checkbox.checked;
+                    
+                    if (checkbox.checked) {
+                        answerElement.classList.add('selected');
+                    } else {
+                        answerElement.classList.remove('selected');
+                    }
+                    
+                    // Активировать кнопку "Следующий", если выбран хотя бы один ответ
+                    const selectedAnswers = document.querySelectorAll('.answer-checkbox:checked');
+                    nextBtn.disabled = selectedAnswers.length === 0;
+                });
+                
+                answersContainer.appendChild(answerElement);
+            });
+            
+            // Сбросить состояние кнопки "Следующий"
+            nextBtn.disabled = true;
+            
+            // Восстановить предыдущий ответ, если он был
+            if (userAnswers[currentQuestionIndex]) {
+                userAnswers[currentQuestionIndex].forEach(index => {
+                    const checkbox = document.getElementById(`answer${index}`);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                        checkbox.parentElement.classList.add('selected');
+                    }
+                });
+                nextBtn.disabled = false;
+            }
+        }
+
+        // Обновить индикатор прогресса
+        function updateProgress() {
+            const progress = ((currentQuestionIndex) / shuffledQuestions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            currentQuestionElem.textContent = currentQuestionIndex;
+            totalQuestionsElem.textContent = shuffledQuestions.length;
+        }
+
+        // Проверить ответ и перейти к следующему вопросу
+        function checkAnswerAndContinue() {
+            const question = shuffledQuestions[currentQuestionIndex];
+            const checkboxes = document.querySelectorAll('.answer-checkbox');
+            const selectedIndices = [];
+            
+            checkboxes.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    selectedIndices.push(index);
+                }
+            });
+            
+            // Сохранить ответ пользователя
+            userAnswers[currentQuestionIndex] = selectedIndices;
+            
+            // Проверить правильность
+            const isCorrect = JSON.stringify(selectedIndices.sort()) === JSON.stringify(question.correct.sort());
+            
+            // Увеличить счет, если ответ правильный
+            if (isCorrect) {
+                score++;
+            }
+            
+            // Если это последний вопрос, показать результаты
+            if (currentQuestionIndex === shuffledQuestions.length - 1) {
+                showResults();
+                return;
+            }
+            
+            // Перейти к следующему вопросу
+            currentQuestionIndex++;
+            showQuestion();
+            updateProgress();
+        }
+
+        // Получить саркастичный комментарий для результата
+        function getSarcasticComment(score, isTimeUp) {
+            const percentage = (score / 20) * 100;
+            
+            if (isTimeUp) {
+                const timeUpComments = [
+                    "Время вышло! Видимо, формулы требовали больше времени на обдумывание...",
+                    "Таймер сработал! Наверное, ты слишком глубоко погрузился в тригонометрию.",
+                    "Упс! Время истекло."
+                ];
+                return timeUpComments[Math.floor(Math.random() * timeUpComments.length)];
+            } else if (percentage >= 90) {
+                const comments = [
+                    "Тихо в лесу, только не спят дрозды. Знают дрозды, что получат физическое воздействие направленное на коррекцию поведенчиских реакций, выраженное в грубой форме. Вот и не спят дрозды!",
+                    "- Я считаю, ты не прав - Пересчитай.",
+                    "Мое отношение к окружающим зависит от того, с какой целью они меня окружили.",
+                    "Ты меня меня этим вопросом загнал в угол"
+                ];
+                return comments[Math.floor(Math.random() * comments.length)];
+            } else if (percentage >= 70) {
+                const comments = [
+                    "Будучи человеком увлеченным, но непоследовательным, он знал много бесполезных(иногда), но интересных вещей",
+                    "Из мудрых книг черпая знания, Трудом усердным постигая сущее, Я стены раздвигал сознания. А оказалось, что они несущие.",
+                    "И дело мастера боялось, и мастера дела избегал.",
+                    "Нас тупило утро"
+                ];
+                return comments[Math.floor(Math.random() * comments.length)];
+            } else if (percentage >= 50) {
+                const comments = [
+                    "Утро к вечеру намудрило.",
+                    "Не принимай на свой счет ничего, кроме денег",
+                    "Символические парадигмы модернизации культурного пространства не соответсвует моему видению проблемы.",
+                    "Умственно усталый",
+                    "Я не туплю, я экономно расходую потенциал.",
+                    "Всё идет по плану, но это не тот план"
+                ];
+                return comments[Math.floor(Math.random() * comments.length)];
+            } else if (percentage >= 30) {
+                const comments = [
+                    "Ничего так не помогает найти компромисс, как наличие компромата.",
+                    "С чувством подлой радости совершаешь гадости(",
+                    "Думать раньше было уже поздно",
+                    "Я не хочу портить ответом ваш замечательный вопрос!",
+                    "Есть все же разум во вселенной, раз не выходит на контакт",
+                    "Я уже не спрашиваю, где справедливость. Я интересуюсь, где логика."
+                ];
+                return comments[Math.floor(Math.random() * comments.length)];
+            } else {
+                const comments = [
+                    "- Как на учебном фронте? - Я дезертир.",
+                    "Помолчу... Пока мысли не станут цензурными, этичными и политкорректными...",
+                    "Дела идут пока отлично, поскольку к ним не приступал",
+                    "Ты шкаф большой, но антресоль пустая.",
+                    "Доверься знающим, но втихаря загугли",
+                    "Конечно мир я не спасу, но может зло помрет от смеха",
+                    "Сдесь ошыбок стоька, катеца слиза, как песать так можна, о мои глоза."
+                ];
+                return comments[Math.floor(Math.random() * comments.length)];
+            }
+        }
+
+        // Показать результаты теста
+        function showResults() {
+            stopTimer();
+            
+            // Скрыть контейнер вопросов, показать результаты
+            questionContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            timerContainer.style.display = 'none';
+            
+            // Установить счет
+            scoreValue.textContent = score;
+            
+            // Установить прогресс в круговой диаграмме
+            const percentage = (score / shuffledQuestions.length) * 100;
+            scoreCircle.style.background = `conic-gradient(#2ecc71 0% ${percentage}%, #34495e ${percentage}% 100%)`;
+            
+            // Установить саркастичный комментарий
+            commentContainer.innerHTML = `
+                <div class="comment">${getSarcasticComment(score, false)}</div>
+            `;
+            
+            // Показать информацию о времени
+            if (testStartTime && testEndTime) {
+                const timeSpent = Math.floor((testEndTime - testStartTime) / 1000);
+                const minutes = Math.floor(timeSpent / 60);
+                const seconds = timeSpent % 60;
+                timeInfo.textContent = `Вы завершили тест за ${minutes} минут ${seconds} секунд`;
+            }
+            
+            // Показать разбор ошибок
+            showMistakesAnalysis(false);
+        }
+
+        // Показать анализ ошибок
+        function showMistakesAnalysis(isTimeUp) {
+            const mistakes = [];
+            const container = isTimeUp ? timeUpMistakesContainer : mistakesContainer;
+            
+            // Собрать все вопросы с ошибками
+            for (let i = 0; i < shuffledQuestions.length; i++) {
+                const question = shuffledQuestions[i];
+                const userAnswer = userAnswers[i];
+                
+                // Если пользователь ответил на этот вопрос
+                if (userAnswer !== undefined) {
+                    const isCorrect = JSON.stringify(userAnswer.sort()) === JSON.stringify(question.correct.sort());
+                    
+                    if (!isCorrect) {
+                        // Восстанавливаем оригинальный порядок ответов для отображения
+                        const originalOrderAnswers = [];
+                        const answerMapping = question.answerMapping;
+                        
+                        // Создаем массив ответов в оригинальном порядке
+                        for (let j = 0; j < question.originalAnswers.length; j++) {
+                            originalOrderAnswers.push({
+                                text: question.originalAnswers[j],
+                                isCorrect: question.originalCorrect.includes(j),
+                                isUserSelected: userAnswer.includes(answerMapping.indexOf(j))
+                            });
+                        }
+                        
+                        mistakes.push({
+                            question: question.question,
+                            answers: originalOrderAnswers,
+                            explanation: question.explanation,
+                            questionNumber: i + 1
+                        });
+                    }
+                }
+            }
+            
+            // Отображаем ошибки
+            if (mistakes.length === 0) {
+                container.innerHTML = `
+                    <div class="no-mistakes">
+                        <h3><i class="fas fa-crown"></i> Отличный результат!</h3>
+                        <p>Вы не допустили ни одной ошибки!</p>
+                        <p>Ваши знания тригонометрии на высшем уровне!</p>
+                    </div>
+                `;
+            } else {
+                let mistakesHTML = `
+                    <h3 class="mistakes-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Разбор допущенных ошибок (${mistakes.length} из ${shuffledQuestions.length} вопросов)
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </h3>
+                `;
+                
+                mistakes.forEach((mistake, index) => {
+                    let answersHTML = '<div class="mistake-answers">';
+                    
+                    mistake.answers.forEach((answer, ansIndex) => {
+                        let className = 'answer-item';
+                        let marker = '';
+                        
+                        if (answer.isCorrect && answer.isUserSelected) {
+                            className += ' correct user-selected';
+                            marker = '<span class="answer-marker correct-marker"><i class="fas fa-check"></i></span>';
+                        } else if (answer.isCorrect) {
+                            className += ' correct';
+                            marker = '<span class="answer-marker correct-marker"><i class="fas fa-check"></i></span>';
+                        } else if (answer.isUserSelected) {
+                            className += ' incorrect user-selected';
+                            marker = '<span class="answer-marker incorrect-marker"><i class="fas fa-times"></i></span>';
+                        }
+                        
+                        answersHTML += `
+                            <div class="${className}">
+                                ${marker}
+                                <span>${answer.text}</span>
+                            </div>
+                        `;
+                    });
+                    
+                    answersHTML += '</div>';
+                    
+                    mistakesHTML += `
+                        <div class="mistake-item">
+                            <div class="mistake-question">
+                                <strong>Вопрос ${mistake.questionNumber}:</strong> ${mistake.question}
+                            </div>
+                            ${answersHTML}
+                            <div class="mistake-explanation">
+                                <strong><i class="fas fa-lightbulb"></i> Объяснение:</strong> ${mistake.explanation}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = mistakesHTML;
+            }
+        }
+
+        // Обработчики событий
+        startBtn.addEventListener('click', initTest);
+        
+        nextBtn.addEventListener('click', () => {
+            if (!nextBtn.disabled) {
+                checkAnswerAndContinue();
+            }
+        });
+        
+        restartResultsBtn.addEventListener('click', initTest);
+        timeUpRestartBtn.addEventListener('click', initTest);
+
+        // Инициализация при загрузке страницы
+        window.addEventListener('DOMContentLoaded', () => {
+            totalQuestionsElem.textContent = 20;
+        });
+    </script>
+</body>
+</html>
