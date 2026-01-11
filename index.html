@@ -634,7 +634,7 @@
         
         <div id="timerContainer" class="timer-container" style="display: none;">
             <div><i class="fas fa-clock icon"></i>Осталось времени:</div>
-            <div class="timer" id="timer">09:36</div>
+            <div class="timer" id="timer">15:01</div>
         </div>
         
         <div class="progress-container">
@@ -653,7 +653,7 @@
                 <h3><i class="fas fa-list-alt icon"></i>Правила тестирования</h3>
                 <ul>
                     <li>Тест состоит из <span class="highlight">20 случайных вопросов</span> из большого банка заданий</li>
-                    <li>На выполнение дается <span class="highlight">9 минут 36 секунд</span></li>
+                    <li>На выполнение дается <span class="highlight">15 минут 1 секунда</span></li>
                     <li>В некоторых вопросах может быть <span class="highlight">несколько правильных ответов</span></li>
                     <li>Варианты ответов <span class="highlight">перемешиваются случайным образом</span> для каждого вопроса</li>
                     <li>Каждый вопрос оценивается в <span class="highlight">1 балл</span></li>
@@ -1066,7 +1066,7 @@
         let score = 0;
         let userAnswers = [];
         let shuffledQuestions = [];
-        let timeLeft = 9 * 60 + 36; // 9 минут 36 секунд в секундах
+        let timeLeft = 15 * 60 + 1; // 15 минут 1 секунд в секундах
         let timerInterval = null;
         let testStartTime = null;
         let testEndTime = null;
@@ -1183,7 +1183,7 @@
             score = 0;
             userAnswers = [];
             shuffledQuestions = prepareQuestions();
-            timeLeft = 9 * 60 + 36; // 9 минут 36 секунд
+            timeLeft = 15 * 60 + 1; // 15 минут 1 секунд
             
             // Сбросить таймер
             timer.textContent = formatTime(timeLeft);
