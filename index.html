@@ -836,9 +836,9 @@
             // Простейшие тригонометрические уравнения (8 вопросов)
             {
                 question: "Формула решения уравнения sin x = a:",
-                answers: ["x = (-1)ⁿ arcsin a + πn", "x = ±arccos a + 2πn", "x = arcsin a + 2πn", "x = (-1)ⁿ arcsin a + 2πn"],
+                answers: ["x = (-1)ⁿ arcsin a + 2πn", "x = ±arccos a + 2πn", "x = arcsin a + 2πn", "x = (-1)ⁿ arcsin a + πn"],
                 correct: [3],
-                explanation: "Правильная формула: x = (-1)ⁿ arcsin a + 2πn, где n ∈ Z. Это общее решение уравнения sin x = a."
+                explanation: "Правильная формула: x = (-1)ⁿ arcsin a + πn, где n ∈ Z. Это общее решение уравнения sin x = a."
             },
             {
                 question: "Выберите ВСЕ правильные формулы решений:",
@@ -904,7 +904,7 @@
             },
             {
                 question: "Какие из формул следуют из формул двойного угла?",
-                answers: ["sin²α = (1 - cos2α)/2", "cos²α = (1 + cos2α)/2", "tg²α = (1 - cos2α)/(1 + cos2α)", "sinα = 2sin(α/2)cos(α/2)"],
+                answers: ["sin²α = (1 - cos2α)/2", "cos²α = (1 + cos2α)/2", "tg²α = (1 + cos2α)/(1 - cos2α)", "sinα = 2sin(α/2)cos(α/2)"],
                 correct: [0, 1, 3],
                 explanation: "Формулы понижения степени: sin²α = (1 - cos2α)/2, cos²α = (1 + cos2α)/2 и формула синуса половинного угла: sinα = 2sin(α/2)cos(α/2) следуют из формул двойного угла."
             },
@@ -942,9 +942,9 @@
             },
             {
                 question: "Выберите ВСЕ верные формулы:",
-                answers: ["cos(α - β) = cosα cosβ + sinα sinβ", "sin(α - β) = sinα cosβ - cosα sinβ", "tg(α + β) = (tgα + tgβ)/(1 - tgα tgβ)", "ctg(α - β) = (ctgα ctgβ + 1)/(ctgβ - ctgα)"],
+                answers: ["cos(α - β) = cosα cosβ + sinα sinβ", "sin(α - β) = sinα cosβ - cosα sinβ", "tg(α + β) = (tgα + tgβ)/(1 - tgα tgβ)", "tg(α - β) = (tgα tgβ + 1)/(tgβ - tgα)"],
                 correct: [0, 1, 2],
-                explanation: "Правильные формулы: cos(α - β) = cosα cosβ + sinα sinβ, sin(α - β) = sinα cosβ - cosα sinβ, tg(α + β) = (tgα + tgβ)/(1 - tgα tgβ). Формула для ctg неверна."
+                explanation: "Правильные формулы: cos(α - β) = cosα cosβ + sinα sinβ, sin(α - β) = sinα cosβ - cosα sinβ, tg(α + β) = (tgα + tgβ)/(1 - tgα tgβ)."
             },
             {
                 question: "cos 75° можно вычислить как cos(45° + 30°). Какая формула применяется?",
@@ -971,10 +971,10 @@
                 explanation: "Для вычисления sin(45° - 30°) применяется формула синуса разности: sin(α - β) = sinα cosβ - cosα sinβ."
             },
             {
-                question: "ctg(α + β) равен:",
-                answers: ["(ctgα ctgβ - 1)/(ctgα + ctgβ)", "(ctgα ctgβ + 1)/(ctgα + ctgβ)", "(ctgα + ctgβ)/(ctgα ctgβ - 1)", "(ctgα + ctgβ)/(ctgα ctgβ + 1)"],
-                correct: [0],
-                explanation: "Формула котангенса суммы: ctg(α + β) = (ctgα ctgβ - 1)/(ctgα + ctgβ)."
+                question: "tg(α + β) равен:",
+                answers: ["(tgα tgβ - 1)/(tgα + tgβ)", "(tgα tgβ + 1)/(tgα + tgβ)", "(tgα + tgβ)/(1 - tgα tgβ)", "(tgα + tgβ)/(1 + tgα tgβ)"],
+                correct: [2],
+                explanation: "Формула котангенса суммы: tg(α + β) = (tgα + tgβ)/(1 - tgα tgβ)."
             },
             {
                 question: "sin(α - β) равен:",
